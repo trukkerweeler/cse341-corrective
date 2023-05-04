@@ -5,10 +5,10 @@
     "description": "Project 2 API",
     "version": "1.0.0"
   },
-  "host": "web-service-341-project2.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/api-docs": {
@@ -20,6 +20,7 @@
     },
     "/contacts/": {
       "get": {
+        "tags": ["contacts"],
         "description": "",
         "produces": [
           "application/json"
@@ -35,6 +36,7 @@
         }
       },
       "post": {
+        "tags": ["contacts"],
         "description": "",
         "parameters": [
           {
@@ -74,6 +76,7 @@
     },
     "/contacts/{id}": {
       "get": {
+        "tags": ["contacts"],
         "description": "",
         "produces": [
           "application/json"
@@ -96,6 +99,7 @@
         }
       },
       "put": {
+        "tags": ["contacts"],
         "description": "",
         "parameters": [
           {
@@ -139,6 +143,7 @@
         }
       },
       "delete": {
+        "tags": ["contacts"],
         "description": "",
         "parameters": [
           {
@@ -160,6 +165,7 @@
     },
     "/corrective/": {
       "get": {
+        "tags": ["corrective"],
         "description": "",
         "produces": [
           "application/json"
@@ -175,6 +181,7 @@
         }
       },
       "post": {
+        "tags": ["corrective"],
         "description": "",
         "parameters": [
           {
@@ -220,6 +227,7 @@
     },
     "/corrective/{id}": {
       "get": {
+        "tags": ["corrective"],
         "description": "",
         "produces": [
           "application/json"

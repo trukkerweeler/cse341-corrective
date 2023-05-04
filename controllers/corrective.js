@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const mongodb = require('../db/connect');
+const validator = require('../validator');
 
 
 const getAll = async (req, res) => {
@@ -38,53 +39,64 @@ const createCorrective = async (req, res) => {
     created_date: req.body.created_date,
     closed_date: req.body.closed_date
   };
+  if (!req.body.corrective_id || !req.body.description) {
+    res.status(400).send({message: 'content cannot be empty'});
+    return;
+  }
+  // const description = req.body();
+  const descriptionCheck = validator.descriptionPass(req.body);
+  // if (descriptionCheck.error) {
+  //   res.status(400).send({message: descriptionCheck.error});
+  //   return;
+  // }
 const response = await mongodb.getDb().db('corrective').collection('corrective').insertOne(corrective);
 if (response.acknowledged) {
   res.status(201).json(response);
 } else {
-  res.status(500).json(response.error || 'Error occured while creating contact.');
+  res.status(500).json(response.error || 'Error occured while creating corrective.');
 }  
-} catch {
+} catch (err) {
   res.status(500).json(err);
 }
 };
 
-const updateContact = async (req, res) => {
+const updateCorrective = async (req, res) => {
   try { 
-  const userId = new ObjectId(req.params.id);
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+  const correctiveId = new ObjectId(req.params.id);
+  const corrective = {
+    corrective_id: req.body.corrective_id,
+    description: req.body.description,
+    subject: req.body.subject,
+    assigned_to: req.body.assigned_to,
+    closed: req.body.closed,
+    created_date: req.body.created_date,
+    closed_date: req.body.closed_date
   };
-const response = await mongodb.getDb().db('testdb').collection('contacts').replaceOne({_id: userId }, contact);
+const response = await mongodb.getDb().db('corrective').collection('corrective').replaceOne({_id: correctiveId }, corrective);
 console.log(response);
 if (response.acknowledged) {
   res.status(204).send();
 } else {
-  res.status(500).json(response.error || 'Error occured shile updating contact.');
+  res.status(500).json(response.error || 'Error occured shile updating corrective.');
 }  
 } catch {
   res.status(500).json(err);
 }
 };
 
-const deleteContact = async (req, res) => {
+const deleteCorrective = async (req, res) => {
   try{
-    const userId = new ObjectId(req.params.id);
-  const response = await mongodb.getDb().db('testdb').collection('contacts').deleteOne({_id: userId }, true);
+    const correctiveId = new ObjectId(req.params.id);
+  const response = await mongodb.getDb().db('corrective').collection('corrective').deleteOne({_id: correctiveId }, true);
   console.log(response);
   if (response.deletedCount > 0) {
     res.status(200).send();
   } else {
-    res.status(500).json(response.error || 'Error occured while deleting contact.');
+    res.status(500).json(response.error || 'Error occured while deleting corrective.');
   }  
 } catch {
   res.status(500).json(err);
 }
 };
 
-module.exports = { getAll, getOne, createCorrective };
-// igd
+module.exports = { getAll, getOne, createCorrective, updateCorrective, deleteCorrective };
