@@ -4,7 +4,8 @@ const validator = require('../validator');
 
 
 const getAll = async (req, res) => {
-  try{
+    //#swagger.tags=['Corrective']
+    try{
     const result = await mongodb.getDb().db('corrective').collection('corrective').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -16,7 +17,8 @@ const getAll = async (req, res) => {
 };
 
 const getOne = async (req, res) => {
-  try {
+    //#swagger.tags=['Corrective']
+    try {
     const corrective = new ObjectId(req.params.id);
   const result = await mongodb.getDb().db('corrective').collection('corrective').find({ _id: corrective });
   result.toArray().then((lists) => {
@@ -29,7 +31,8 @@ const getOne = async (req, res) => {
 };
 
 const createCorrective = async (req, res) => {
-  try{ 
+    //#swagger.tags=['Corrective']
+    try{ 
     const corrective = {
     corrective_id: req.body.corrective_id,
     description: req.body.description,
@@ -43,12 +46,6 @@ const createCorrective = async (req, res) => {
     res.status(400).send({message: 'content cannot be empty'});
     return;
   }
-  // const description = req.body();
-  const descriptionCheck = validator.descriptionPass(req.body);
-  // if (descriptionCheck.error) {
-  //   res.status(400).send({message: descriptionCheck.error});
-  //   return;
-  // }
 const response = await mongodb.getDb().db('corrective').collection('corrective').insertOne(corrective);
 if (response.acknowledged) {
   res.status(201).json(response);
@@ -61,7 +58,8 @@ if (response.acknowledged) {
 };
 
 const updateCorrective = async (req, res) => {
-  try { 
+    //#swagger.tags=['Corrective']
+    try { 
   const correctiveId = new ObjectId(req.params.id);
   const corrective = {
     corrective_id: req.body.corrective_id,
@@ -85,7 +83,8 @@ if (response.acknowledged) {
 };
 
 const deleteCorrective = async (req, res) => {
-  try{
+    //#swagger.tags=['Corrective']
+    try{
     const correctiveId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db('corrective').collection('corrective').deleteOne({_id: correctiveId }, true);
   console.log(response);

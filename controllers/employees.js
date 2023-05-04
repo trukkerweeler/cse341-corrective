@@ -4,6 +4,7 @@ const passwordUtil = require('../util/passwordComplexityCheck');
 
 
 const getAll = async (req, res) => {
+  //#swagger.tags=['Employees']
   try{
     const result = await mongodb.getDb().db('corrective').collection('employees').find();
   result.toArray().then((lists) => {
@@ -16,6 +17,7 @@ const getAll = async (req, res) => {
 };
 
 const getOne = async (req, res) => {
+    //#swagger.tags=['Employees']
   try {
     const userId = new ObjectId(req.params.id);
   const result = await mongodb.getDb().db('corrective').collection('employees').find({ _id: userId });
@@ -29,7 +31,8 @@ const getOne = async (req, res) => {
 };
 
 const createEmployee = async (req, res) => {
-  try{ 
+    //#swagger.tags=['Employees']
+    try{ 
     const employee = 
         {
             firstName: req.body.firstName,
@@ -62,7 +65,8 @@ const createEmployee = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-  try { 
+    //#swagger.tags=['Employees']
+    try { 
   const userId = new ObjectId(req.params.id);
   const employee = {
     firstName: req.body.firstName,
@@ -97,7 +101,8 @@ if (response.acknowledged) {
 };
 
 const deleteEmployee = async (req, res) => {
-  try{
+    //#swagger.tags=['Employees']
+    try{
     const userId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db('corrective').collection('employees').deleteOne({_id: userId }, true);
   console.log(response);
