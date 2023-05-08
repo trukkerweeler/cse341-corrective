@@ -3,6 +3,7 @@ const mongodb = require('../db/connect');
 const passwordUtil = require('../util/passwordComplexityCheck');
 
 
+
 const getAll = async (req, res) => {
   //#swagger.tags=['Employees']
   try{
