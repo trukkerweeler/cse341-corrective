@@ -5,10 +5,10 @@
     "description": "Project 2 API",
     "version": "1.0.0"
   },
-  "host": "https://web-service-341-project2.onrender.com",
+  "host": "web-service-341-project2.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/login": {
