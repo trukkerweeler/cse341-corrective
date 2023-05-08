@@ -6,7 +6,7 @@ GET http://localhost:3000/corrective
 ###
 GET http://localhost:3000/corrective/645001d610cdcc05d0d04c47
 
-### Create contact
+### Create corrective
 POST http://localhost:3000/corrective HTTP/1.1
 Content-Type: application/json
 
